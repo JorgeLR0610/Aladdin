@@ -5,6 +5,7 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import yt_dlp
+import random
 
 
 queue = list()
@@ -281,4 +282,14 @@ async def clear_queue(ctx):
     else:
         ctx.send('La cola de reproducción ya está vacía')
     
+@bot.command(name='shuffle')
+async def shuffle_queue(ctx):
+    global queue
+    if len(queue) > 1:
+        random.shuffle(queue)
+        
+        await ctx.send('La cola de reproducción se ha aleatorizado jeje.')
+    else:
+        await ctx.send('No hay suficientes rolas en la cola para ponerla en aleatorio.')
+        
 bot.run(token)
